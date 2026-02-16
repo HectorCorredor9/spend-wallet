@@ -1,5 +1,3 @@
-'use server';
-
 import uuid4 from 'uuid4';
 // Internal app
 import { Tenant, SessionData } from '@/interfaces';
