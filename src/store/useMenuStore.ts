@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { createJSONStorage,  persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 // Internal app
 import type { MenuStoreProps } from '@/interfaces';
 
@@ -24,17 +24,15 @@ import type { MenuStoreProps } from '@/interfaces';
  */
 export const useMenuStore = create<MenuStoreProps>()(
   persist(
-      (set) => ({
-        currentItem: 'home',
+    (set) => ({
+      currentItem: 'home',
 
-        setCurrentItem: (item) =>
-          set({ currentItem: item }, false),
+      setCurrentItem: (item) => set({ currentItem: item }, false),
 
-        drawerStatus: false,
+      drawerStatus: false,
 
-        setDrawerStatus: (status) =>
-          set({ drawerStatus: status }, false),
-      }), 
+      setDrawerStatus: (status) => set({ drawerStatus: status }, false),
+    }),
     { name: 'menuStore', storage: createJSONStorage(() => sessionStorage) }
   )
 );
