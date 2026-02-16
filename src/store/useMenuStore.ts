@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, devtools, persist } from 'zustand/middleware';
 // Internal app
-import { MenuStoreProps } from '@/interfaces';
+import type { MenuStoreProps } from '@/interfaces';
 
 /**
  * Store for navMenu
@@ -28,11 +28,13 @@ export const useMenuStore = create<MenuStoreProps>()(
       (set) => ({
         currentItem: 'home',
 
-        setCurrentItem: (item) => set({ currentItem: item }, false, 'setCurrentItem'),
+        setCurrentItem: (item) =>
+          set({ currentItem: item }, false, 'setCurrentItem'),
 
         drawerStatus: false,
 
-        setDrawerStatus: (status) => set({ drawerStatus: status }, false, 'setDrawerStatus'),
+        setDrawerStatus: (status) =>
+          set({ drawerStatus: status }, false, 'setDrawerStatus'),
       }),
       { name: 'menu-store' }
     ),
