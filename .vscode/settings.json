@@ -1,0 +1,29 @@
+{
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.detectIndentation": false,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.guides.bracketPairsHorizontal": "active",
+  "editor.largeFileOptimizations": false,
+  "editor.minimap.autohide": "mouseover",
+  "editor.renderWhitespace": "all",
+  "editor.tabSize": 2,
+  "editor.wordWrap": "wordWrapColumn",
+  "editor.wordWrapColumn": 120,
+  "files.eol": "\n",
+  "prettier.bracketSameLine": false,
+  "prettier.jsxSingleQuote": false,
+  "prettier.printWidth": 120,
+  "prettier.semi": true,
+  "prettier.singleAttributePerLine": false,
+  "prettier.singleQuote": true,
+  "files.associations": {
+    ".env.*": "properties",
+    ".env*": "properties"
+  },
+  "i18n-ally.localesPaths": ["src/i18n", "public/images/lang"]
+}

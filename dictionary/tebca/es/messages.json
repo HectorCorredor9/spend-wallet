@@ -1,0 +1,20 @@
+{
+  "messages": {
+    "somethingwentWrong": "Algo salió mal",
+    "pleaseTryAgain": "Inténtalo nuevamente",
+    "incorrectCredentials": "El nombre de usuario o la contraseña que ha introducido son incorrectos. Inténtelo de nuevo.",
+    "changeSuccess": "Cambio realizado con éxito",
+    "passwordAttemptsExceeded": "Intentos de contraseña excedidos, por favor intenta de nuevo más tarde.",
+    "invalidRefreshToken": "Error al refrescar el token, por favor inicia sesión nuevamente.",
+    "sessionExpired": "Tu sesión ha expirado, por favor inicia sesión nuevamente.",
+    "unauthorizedAttribute": "Se intentó escribir un atributo no autorizado.",
+    "accessTokenRevoked": "El token de acceso ha sido revocado.",
+    "secretHashNotMatch": "SecretHash no coincide con el cliente.",
+    "couldNotLoadCredentials": "No se pudieron cargar las credenciales de ningún proveedor.",
+    "otpLimitAxceed": "Ha excedido el límite de intentos, por favor intente más tarde.",
+    "otpExpired": "El código ha expirado, por favor solicite uno nuevo.",
+    "otpInvalid": "El código de verificación proporcionado es inválido, por favor intente de nuevo.",
+    "passwordUsed": "La contraseña ha sido utilizada anteriormente, por favor ingresa una nueva.",
+    "tempPasswordExpired": "La contraseña temporal ha expirado. Por favor, solicite una nueva."
+  }
+}

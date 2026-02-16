@@ -1,0 +1,11 @@
+{
+  "signin": {
+    "welcome": "Hi, Welcome to your wallet!",
+    "enterCredentials": "Enter your credentials to continue.",
+    "newUser": "Don't have an account?",
+    "securityPassword": "For security reasons you need to change your password.",
+    "forgotPassword": "Forgot password?",
+    "signUp": "Sign up",
+    "signIn": "Sign in"
+  }
+}

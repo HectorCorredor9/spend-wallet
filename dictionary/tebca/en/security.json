@@ -1,0 +1,17 @@
+{
+  "security": {
+    "title": "Security",
+    "description": "Manage password change to keep your account secure.",
+    "form": {
+      "description": "Update your password regularly for better security.",
+      "currentPassword": "Current Password"
+    },
+    "requirements": {
+      "title": "Password Requirements",
+      "1": "Minimum 8 characters",
+      "2": "At least one uppercase and one lowercase letter",
+      "3": "At least one number",
+      "4": "At least one special character (e.g., !@#$%^&*)"
+    }
+  }
+}

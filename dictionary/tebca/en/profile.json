@@ -1,0 +1,21 @@
+{
+  "profile": {
+    "title": "My profile",
+    "description": "Manage your personal information, references, and account security.",
+    "security": {
+      "title": "Security",
+      "description": "Manage your password changes to keep your account secure."
+    },
+    "personalInfo": {
+      "title": "Personal information"
+    },
+    "accountInfo": {
+      "title": "Account information",
+      "createdAt": "Account created",
+      "country": "Country",
+      "mfa": "Two-factor authentication",
+      "activated": "Activated",
+      "deactivated": "Deactivated"
+    }
+  }
+}

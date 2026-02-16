@@ -1,0 +1,36 @@
+{
+  "movements": {
+    "description": "Historial completo de movimientos de tu billetera",
+    "notMovements": "No tiene movimientos registrados con esta tarjeta.",
+    "errorShowingMovements": "Ocurrió un error al obtener tus movimientos. Por favor, inténtalo de nuevo más tarde.",
+    "table": {
+      "description": "Descripción",
+      "status": "Estado",
+      "amount": "Monto",
+      "allMovements": "Todos los movimientos"
+    },
+    "filter": {
+      "keyword": "Buscar por descripción",
+      "date": "Filtrar por fecha",
+      "status": "Filtrar por estado",
+      "all": "Todos",
+      "pending": "Pendientes",
+      "completed": "Completados",
+      "failed": "Fallidos",
+      "apply": "Aplicar filtros",
+      "clear": "Limpiar filtros",
+      "allTypes": "Todos los tipos",
+      "allStatus": "Todos los estados",
+      "search": "Buscar",
+      "debit": "Débito",
+      "credit": "Crédito",
+      "type": "Filtrar por tipo",
+      "minAmount": "Monto mínimo",
+      "maxAmount": "Monto máximo",
+      "startDate": "Fecha de inicio",
+      "endDate": "Fecha de fin",
+      "searchFor": "Buscar por:",
+      "notFilterResults": "No se encontraron movimientos que coincidan con los criterios de búsqueda."
+    }
+  }
+}

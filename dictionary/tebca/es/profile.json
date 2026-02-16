@@ -1,0 +1,21 @@
+{
+  "profile": {
+    "title": "Mi perfil",
+    "description": "Gestiona tu información personal, referencias y seguridad de tu cuenta.",
+    "security": {
+      "title": "Seguridad",
+      "description": "Gestiona el cambio de contraseña para mantener tu cuenta segura."
+    },
+    "personalInfo": {
+      "title": "Información personal"
+    },
+    "accountInfo": {
+      "title": "Información de la cuenta",
+      "createdAt": "Cuenta creada",
+      "country": "País",
+      "mfa": "Autenticación de dos factores",
+      "activated": "Activado",
+      "deactivated": "Desactivado"
+    }
+  }
+}

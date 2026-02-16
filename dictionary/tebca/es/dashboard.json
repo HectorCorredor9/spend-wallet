@@ -1,0 +1,32 @@
+{
+  "dashboard": {
+    "myCards": "Mis tarjetas",
+    "manageCards": "Administra y consulta tus tarjetas",
+    "goodMorning": "Buenos días",
+    "goodAfternoon": "Buenas tardes",
+    "goodEvening": "Buenas noches",
+    "active": "Activa",
+    "inactive": "Inactiva",
+    "expires": "Vence",
+    "hideNumber": "Ocultar número",
+    "showNumber": "Mostrar número",
+    "hideCvv": "Ocultar CVV2",
+    "showCvv": "Mostrar CVV2",
+    "lastTransactions": "Últimos movimientos",
+    "viewAll": "Ver todos",
+    "oops": "¡Vaya!",
+    "showMoves": "No podemos mostrar tus movimientos",
+    "noTransactions": "No se encontraron movimientos.",
+    "balance": "Saldo disponible",
+    "virtual": "Virtual",
+    "physical": "Física",
+    "newPin": "Nuevo PIN",
+    "pin": "PIN actual",
+    "currentNewPin": "Confirmar nuevo PIN",
+    "changePin": "Cambiar PIN",
+    "freezeCard": "Congelar tarjeta",
+    "freezeCardMessage": "¿Estás seguro de que deseas congelar tu tarjeta?",
+    "activateCard": "Activar tarjeta",
+    "replacement": "Reposición"
+  }
+}

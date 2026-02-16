@@ -1,0 +1,32 @@
+{
+  "dashboard": {
+    "myCards": "My cards",
+    "manageCards": "Manage and view your cards",
+    "goodMorning": "Good morning",
+    "goodAfternoon": "Good afternoon",
+    "goodEvening": "Good evening",
+    "active": "Active",
+    "inactive": "Inactive",
+    "expires": "Expires",
+    "hideNumber": "Hide number",
+    "showNumber": "Show number",
+    "hideCvv": "Hide CVV2",
+    "showCvv": "Show CVV2",
+    "lastTransactions": "Last movements",
+    "viewAll": "View all",
+    "oops": "Oops!",
+    "showMoves": "We can't show your moves",
+    "noTransactions": "No movements found.",
+    "balance": "Available balance",
+    "virtual": "Virtual",
+    "physical": "Physical",
+    "newPin": "New PIN",
+    "pin": "Current PIN",
+    "currentNewPin": "Confirm new PIN",
+    "changePin": "Change PIN",
+    "freezeCard": "Freeze card",
+    "freezeCardMessage": "Are you sure you want to freeze your card?",
+    "activateCard": "Activate card",
+    "replacement": "Replacement"
+  }
+}

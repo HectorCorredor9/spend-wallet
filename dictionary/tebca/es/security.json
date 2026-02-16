@@ -1,0 +1,17 @@
+{
+  "security": {
+    "title": "Seguridad",
+    "description": "Gestiona el cambio de contraseña para mantener tu cuenta segura.",
+    "form": {
+      "description": "Actualiza tu contraseña regularmente para mayor seguridad.",
+      "currentPassword": "Contraseña actual"
+    },
+    "requirements": {
+      "title": "Requisitos de la contraseña",
+      "1": "Mínimo 8 caracteres",
+      "2": "Al menos una letra mayúscula y una minúscula",
+      "3": "Al menos un número",
+      "4": "Al menos un carácter especial (por ejemplo: !@#$%^&*)"
+    }
+  }
+}

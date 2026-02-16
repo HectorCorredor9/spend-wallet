@@ -1,0 +1,22 @@
+{
+  "mfa": {
+    "title": "Verifica tu identidad",
+    "instruction": "Hemos enviado un código de verificación de 6 dígitos a tu correo electrónico.",
+    "codeLabel": "Código de verificación",
+    "placeholder": "Ingresa el código de 6 dígitos",
+    "securityInfo": "El código es válido por tiempo limitado. No lo compartas con nadie.",
+    "trustDeviceLabel": "Recordar este dispositivo",
+    "continue": "Continuar",
+    "back": "Volver al inicio de sesión",
+    "resend": "Reenviar código",
+    "resendTimer": "Reenviar código (disponible en {time})",
+    "resendRequiresLogin": "Por motivos de seguridad, por favor inicia sesión nuevamente para solicitar un nuevo código",
+    "errors": {
+      "empty": "Por favor, ingresa un código de 6 dígitos.",
+      "numeric": "El código solo puede contener números.",
+      "invalid": "El código que ingresaste es incorrecto. Inténtalo de nuevo.",
+      "expired": "Este código ha expirado. Por favor solicita uno nuevo.",
+      "generic": "No pudimos verificar tu código. Inténtalo de nuevo o solicita uno nuevo."
+    }
+  }
+}

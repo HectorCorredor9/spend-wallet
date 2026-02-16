@@ -1,0 +1,66 @@
+import { z } from 'zod';
+// Internal app
+import { availableLangs, availableTenants } from '@/constans';
+
+const availableTenantsSchema = z.enum(availableTenants);
+const availableLangsSchema = z.enum(availableLangs);
+const langDataSchema = z.record(z.record(z.string()));
+const langFilesSchema = z.record(z.array(z.string()));
+const reqResBodySchema = z.record(z.unknown());
+const tenantSettingsSchema = z.object({
+  webUrl: z.string(),
+  servUrl: z.string(),
+  awsUrl: z.string(),
+  cardsSolutionUrl: z.string(),
+  accountsSolutionUrl: z.string(),
+  timeZone: z.string(),
+  redisHost: z.string(),
+  redisPort: z.number(),
+  redisDb: z.number(),
+  redisTls: z.boolean(),
+  redisUser: z.string(),
+  redisPassword: z.string(),
+  redisPrefix: z.string().optional(),
+  sessExpTime: z.number(),
+  sessResetTime: z.number(),
+  sessMatchIp: z.boolean(),
+  sessRefresh: z.boolean(),
+  tenantPwa: availableTenantsSchema,
+  tenantTheme: availableTenantsSchema,
+  tenantImages: availableTenantsSchema,
+  tenantDictionary: availableTenantsSchema,
+  tenantAllowed: z.array(z.string()),
+  tenantId: z.string(),
+  tenantIdDirect: z.string(),
+  tenantClientId: z.string(),
+  tenantClientSecret: z.string(),
+  cognitoRegion: z.string(),
+  cognitoUserPoolId: z.string(),
+  cognitoClientId: z.string(),
+  cognitoClientSecret: z.string(),
+  transportKeyCardSolutions: z.string(),
+  transportKeyAcccount: z.string(),
+  secJweStr: z.string(),
+  secJwsStr: z.string(),
+  webJwePrivKey: z.string(),
+  webJwePubKey: z.string(),
+  webJwsPrivKey: z.string(),
+  webJwsPubKey: z.string(),
+  servJwePrivKey: z.string(),
+  servJwePubKey: z.string(),
+  servJwsPrivKey: z.string(),
+  servJwsPubKey: z.string(),
+});
+const envSettingsSchema = z.record(tenantSettingsSchema);
+const stringMapSchema = z.record(z.string(), z.string());
+
+export const appSchemas = {
+  availableTenants: availableTenantsSchema,
+  availableLangs: availableLangsSchema,
+  langData: langDataSchema,
+  langFiles: langFilesSchema,
+  reqResBody: reqResBodySchema,
+  tenantSettings: tenantSettingsSchema,
+  envSettings: envSettingsSchema,
+  stringMap: stringMapSchema,
+};

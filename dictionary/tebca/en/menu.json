@@ -1,0 +1,10 @@
+{
+  "menu": {
+    "home": "Home",
+    "movements": "Movements",
+    "send": "Send",
+    "profile": "Profile",
+    "about": "About",
+    "security": "Security"
+  }
+}

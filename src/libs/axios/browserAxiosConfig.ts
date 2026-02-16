@@ -1,0 +1,87 @@
+import axios from 'axios';
+import { importSPKI } from 'jose';
+// Internal app
+import { useUiStore } from '@/store';
+import { useTranslations } from 'next-intl';
+import { jwtAlgs, headersKey } from '@/constans';
+import { browserHttpSetts } from '@/tenants/tenantSettings';
+import { encryptData, decryptData, signData, verifySignature, disassembleJWS, assembleJWS, encode } from '@/security';
+
+/**
+ * Creates an Axios instance with predefined configuration for making HTTP requests.
+ */
+const browserAxios = axios.create();
+
+/**
+ * Interceptor for handling request encryption and signing.
+ * Encrypts the request data and signs it before sending.
+ */
+browserAxios.interceptors.request.use(async (request) => {
+  const { data, headers } = request;
+  const { secJweStr, settings } = await browserHttpSetts();
+  const secretJwe = encode(secJweStr);
+  const { webUrl, webJwePubKey, secJwsStr } = (await decryptData(settings, secretJwe)) as Record<string, string>;
+
+  request.baseURL = webUrl;
+
+  if (data?.payload) {
+    try {
+      let { payload } = data;
+      const secretJwe = await importSPKI(webJwePubKey, jwtAlgs.jweAlgRsa);
+      payload = await encryptData(payload, secretJwe, jwtAlgs.jweAlgRsa);
+      const secretJws = encode(secJwsStr);
+      const signedData = await signData(payload, secretJws, jwtAlgs.jwsAlgSec);
+      const authJws = disassembleJWS(signedData);
+      headers[headersKey.appJwsToken] = `JWS ${authJws}`;
+
+      request.data.payload = payload;
+    } catch (error) {
+      throw new Error(`browserAxios Request (${(error as Error).message})`);
+    }
+  }
+
+  return request;
+});
+
+/**
+ * Interceptor for handling response decryption and verification.
+ * Verifies the response signature and decrypts the data.
+ */
+browserAxios.interceptors.response.use(
+  async (response) => {
+    const { data, headers } = response;
+
+    if (data?.payload) {
+      const { secJweStr, settings } = await browserHttpSetts();
+      const secretJwe = encode(secJweStr);
+      const { webJwsPubKey } = (await decryptData(settings, secretJwe)) as Record<string, string>;
+
+      try {
+        let { payload } = data;
+        const tokenApp = headers[headersKey.appJwsToken];
+        const signedData = assembleJWS(tokenApp, payload);
+        const secretJws = await importSPKI(webJwsPubKey, jwtAlgs.jwsAlgRsa);
+        const signatureVerified = await verifySignature(signedData, secretJws);
+        const secretJwe = encode(secJweStr);
+        payload = await decryptData(signatureVerified, secretJwe);
+
+        response.data.payload = payload;
+      } catch (error) {
+        throw new Error(`browserAxios Response (${(error as Error).message})`);
+      }
+    }
+
+    return response;
+  },
+  (error) => {
+    console.error(error);
+    const t = useTranslations();
+    const setPopperError = useUiStore.getState().setPopperError;
+    setPopperError({
+      title: t('messages.somethingwentWrong'),
+      description: t('messages.pleaseTryAgain'),
+    });
+  }
+);
+
+export default browserAxios;

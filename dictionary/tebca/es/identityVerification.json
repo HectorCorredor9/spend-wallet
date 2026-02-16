@@ -1,0 +1,7 @@
+{
+  "identityVerification": {
+    "title": "Verificación de Identidad",
+    "description": "Ingresa tus datos para verificar tu identidad antes de registrarte",
+    "verify": "Verificar"
+  }
+}

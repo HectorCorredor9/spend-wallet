@@ -1,0 +1,77 @@
+{
+  "signup": {
+    "title": "Registration Form",
+    "steps": {
+      "personalData": "Personal Data",
+      "contactInformation": "Contact Information",
+      "additionalData": "Additional Data",
+      "createPassword": "Create Password"
+    },
+    "personalData": {
+      "title": "Complete your personal data",
+      "firstName": "First name",
+      "middleName": "Middle name",
+      "lastName": "Last name",
+      "surName": "Second last name",
+      "birthDate": "Date of birth",
+      "gender": "Gender",
+      "idType": "Document type",
+      "idNumber": "Document number",
+      "genderOptions": {
+        "male": "Male",
+        "female": "Female"
+      },
+      "idTypeOptions": {
+        "dni": "DNI",
+        "passport": "Passport"
+      }
+    },
+    "contactInformation": {
+      "title": "Complete your contact information",
+      "email": "Email",
+      "phoneNumber": "Phone number",
+      "address": "Address",
+      "city": "City",
+      "state": "State",
+      "district": "District"
+    },
+    "additionalData": {
+      "title": "Complete this additional data",
+      "nationality": "Nationality",
+      "birthPlace": "Place of birth",
+      "civilStatus": "Marital status",
+      "verifierCode": "Verifier code",
+      "postalCode": "Postal code",
+      "employed": "Employment status",
+      "laborOld": "Years of employment",
+      "profession": "Profession",
+      "position": "Position",
+      "averageIncome": "Average income",
+      "publicOfficeOld": "Have you held public office?",
+      "publicInst": "Public institution",
+      "taxesObligated": "Tax obligated?",
+      "civilStatusOptions": {
+        "single": "Single",
+        "married": "Married",
+        "divorced": "Divorced",
+        "widowed": "Widowed"
+      },
+      "employedOptions": {
+        "employed": "Employed",
+        "unemployed": "Unemployed",
+        "selfEmployed": "Self-employed",
+        "retired": "Retired"
+      },
+      "yesNo": {
+        "yes": "Yes",
+        "no": "No"
+      }
+    },
+    "createPassword": {
+      "title": "Create a secure password for your account",
+      "nickName": "Username",
+      "newPass": "New password",
+      "confirmPass": "Confirm password"
+    }
+  }
+}

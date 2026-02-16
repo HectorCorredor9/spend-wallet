@@ -1,0 +1,77 @@
+{
+  "signup": {
+    "title": "Formulario de registro",
+    "steps": {
+      "personalData": "Datos personales",
+      "contactInformation": "Datos de contacto",
+      "additionalData": "Datos adicionales",
+      "createPassword": "Crear contraseña"
+    },
+    "personalData": {
+      "title": "Completa tus datos personales",
+      "firstName": "Primer nombre",
+      "middleName": "Segundo nombre",
+      "lastName": "Primer apellido",
+      "surName": "Segundo apellido",
+      "birthDate": "Fecha de nacimiento",
+      "gender": "Género",
+      "idType": "Tipo de documento",
+      "idNumber": "Número de documento",
+      "genderOptions": {
+        "male": "Masculino",
+        "female": "Femenino"
+      },
+      "idTypeOptions": {
+        "dni": "DNI",
+        "passport": "Pasaporte"
+      }
+    },
+    "contactInformation": {
+      "title": "Completa tus datos de contacto",
+      "email": "Correo electrónico",
+      "phoneNumber": "Número de teléfono",
+      "address": "Dirección",
+      "city": "Ciudad",
+      "state": "Estado",
+      "district": "Distrito"
+    },
+    "additionalData": {
+      "title": "Completa estos datos adicionales",
+      "nationality": "Nacionalidad",
+      "birthPlace": "Lugar de nacimiento",
+      "civilStatus": "Estado civil",
+      "verifierCode": "Código verificador",
+      "postalCode": "Código postal",
+      "employed": "Situación laboral",
+      "laborOld": "Antigüedad laboral",
+      "profession": "Profesión",
+      "position": "Cargo",
+      "averageIncome": "Ingreso promedio",
+      "publicOfficeOld": "¿Ha ocupado cargo público?",
+      "publicInst": "Institución pública",
+      "taxesObligated": "¿Obligado por ley de impuestos?",
+      "civilStatusOptions": {
+        "single": "Soltero",
+        "married": "Casado",
+        "divorced": "Divorciado",
+        "widowed": "Viudo"
+      },
+      "employedOptions": {
+        "employed": "Empleado",
+        "unemployed": "Desempleado",
+        "selfEmployed": "Independiente",
+        "retired": "Jubilado"
+      },
+      "yesNo": {
+        "yes": "Si",
+        "no": "No"
+      }
+    },
+    "createPassword": {
+      "title": "Crea una contraseña segura para tu cuenta",
+      "nickName": "Nombre de usuario",
+      "newPass": "Nueva contraseña",
+      "confirmPass": "Confirmar contraseña"
+    }
+  }
+}

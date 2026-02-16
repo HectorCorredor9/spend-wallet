@@ -1,0 +1,20 @@
+{
+  "messages": {
+    "somethingwentWrong": "Something went wrong",
+    "pleaseTryAgain": "Please try again",
+    "incorrectCredentials": "The username or password you entered is incorrect. Please try again.",
+    "changeSuccess": "Change successfully made",
+    "passwordAttemptsExceeded": "We have detected multiple failed attempts, please try again later.",
+    "invalidRefreshToken": "Failed to refresh token, please login again.",
+    "sessionExpired": "Your session has expired, please login again.",
+    "unauthorizedAttribute": "An attempt was made to write an unauthorized attribute.",
+    "accessTokenRevoked": "Access Token has been revoked.",
+    "secretHashNotMatch": "SecretHash does not match client.",
+    "couldNotLoadCredentials": "Could not load credentials from any providers.",
+    "otpLimitAxceed": "We have detected multiple failed attempts, please try again later.",
+    "otpExpired": "The code has expired, please request a new one.",
+    "otpInvalid": "Invalid verification code provided, please try again.",
+    "passwordUsed": "Password has previously been used, please enter a new one.",
+    "tempPasswordExpired": "Temporary password has expired. Please request a new one."
+  }
+}

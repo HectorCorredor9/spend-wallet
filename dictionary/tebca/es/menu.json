@@ -1,0 +1,10 @@
+{
+  "menu": {
+    "home": "Inicio",
+    "movements": "Movimientos",
+    "send": "Envia",
+    "profile": "Perfil",
+    "about": "Acerca de",
+    "security": "Seguridad"
+  }
+}

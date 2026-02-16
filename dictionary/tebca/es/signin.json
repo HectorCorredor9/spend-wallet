@@ -1,0 +1,11 @@
+{
+  "signin": {
+    "welcome": "Hola, ¡Bienvenido a tu billetera!",
+    "enterCredentials": "Ingresa tus credenciales para continuar.",
+    "newUser": "¿No tienes una cuenta?",
+    "securityPassword": "Por razones de seguridad necesitas cambiar tu contraseña.",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "signUp": "Regístrate",
+    "signIn": "Iniciar sesión"
+  }
+}

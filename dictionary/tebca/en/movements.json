@@ -1,0 +1,37 @@
+{
+  "movements": {
+    "description": "Complete history of your wallet movements",
+    "notMovements": "You have no movements registered with this card.",
+    "errorShowingMovements": "An error occurred while fetching your movements. Please try again later.",
+
+    "table": {
+      "description": "Description",
+      "status": "Status",
+      "amount": "Amount",
+      "allMovements": "All movements"
+    },
+    "filter": {
+      "keyword": "Search by description",
+      "date": "Filter by date",
+      "status": "Filter by status",
+      "all": "All",
+      "pending": "Pending",
+      "completed": "Completed",
+      "failed": "Failed",
+      "apply": "Apply filters",
+      "clear": "Clear filters",
+      "allTypes": "All types",
+      "allStatus": "All statuses",
+      "search": "Search",
+      "debit": "Debit",
+      "credit": "Credit",
+      "type": "Filter by type",
+      "minAmount": "Minimum amount",
+      "maxAmount": "Maximum amount",
+      "startDate": "Start date",
+      "endDate": "End date",
+      "searchFor": "Search for:",
+      "notFilterResults": "No movements found with the applied filters."
+    }
+  }
+}
