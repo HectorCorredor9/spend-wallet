@@ -35,7 +35,7 @@ export const useMenuStore = create<MenuStoreProps>()(
         setDrawerStatus: (status) =>
           set({ drawerStatus: status }, false, 'setDrawerStatus'),
       }),
-      { name: 'menu-store' }
+      { name: 'menu-store' },
 
     { name: 'menuStore', storage: createJSONStorage(() => sessionStorage) }
   )
