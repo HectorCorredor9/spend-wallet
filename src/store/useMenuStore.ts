@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { createJSONStorage, devtools, persist } from 'zustand/middleware';
-//Internal app
+// Internal app
 import { MenuStoreProps } from '@/interfaces';
 
 /**
