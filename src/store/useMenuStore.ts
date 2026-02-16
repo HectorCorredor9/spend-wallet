@@ -23,8 +23,8 @@ import { MenuStoreProps } from '@/interfaces';
  * @property {function} setDrawerStatus - Function to set the status of the drawer.
  */
 export const useMenuStore = create<MenuStoreProps>()(
-  persist(
-    devtools(
+  devtools(
+    persist(
       (set) => ({
         currentItem: 'home',
 
@@ -34,8 +34,8 @@ export const useMenuStore = create<MenuStoreProps>()(
 
         setDrawerStatus: (status) => set({ drawerStatus: status }, false, 'setDrawerStatus'),
       }),
-      { name: 'menu-store', storage: createJSONStorage(() => sessionStorage) }
+      { name: 'menuStore', storage: createJSONStorage(() => sessionStorage) }
     ),
-    { name: 'menuStore' }
+    { name: 'menu-store' }
   )
 );
