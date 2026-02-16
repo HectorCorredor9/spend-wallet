@@ -1,50 +1,9 @@
+import React from 'react';
 import '@testing-library/jest-dom';
 import { TextEncoder, TextDecoder } from 'util';
 
 global.TextEncoder = TextEncoder as any;
 global.TextDecoder = TextDecoder as any;
-
-// Mock Web APIs that are not available in Jest environment
-global.Request = class Request {
-  constructor(input: any, init?: any) {
-    this.url = typeof input === 'string' ? input : input.url;
-    this.method = init?.method || 'GET';
-    this.headers = new Map(Object.entries(init?.headers || {}));
-    this.body = init?.body;
-  }
-  url: string;
-  method: string;
-  headers: Map<string, string>;
-  body: any;
-} as any;
-
-global.Response = class Response {
-  constructor(body?: any, init?: any) {
-    this.status = init?.status || 200;
-    this.statusText = init?.statusText || 'OK';
-    this.headers = new Map(Object.entries(init?.headers || {}));
-    this._body = body;
-  }
-  status: number;
-  statusText: string;
-  headers: Map<string, string>;
-  _body: any;
-  async json() {
-    return this._body;
-  }
-  async text() {
-    return this._body;
-  }
-} as any;
-
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    ok: true,
-    status: 200,
-    json: () => Promise.resolve({}),
-    text: () => Promise.resolve(''),
-  }),
-) as any;
 
 jest.mock('jose', () => {
   return {
@@ -59,117 +18,139 @@ jest.mock('next-intl', () => ({
   useTranslations: () => (key: string) => key,
   useLocale: () => 'en',
   useFormatter: () => ({
-    dateTime: (date: Date) => date.toLocaleDateString(),
-    number: (num: number) => num.toString(),
+    dateTime: jest.fn(),
+    number: jest.fn(),
+    relativeTime: jest.fn(),
   }),
-  NextIntlClientProvider: jest.fn().mockImplementation(({ children }) => children),
+  useMessages: () => ({}),
+  useNow: () => new Date(),
+  useTimeZone: () => 'UTC',
 }));
 
+jest.mock('next-intl/server', () => ({
+  getTranslations: () => (key: string) => key,
+  getLocale: () => 'en',
+  getFormatter: () => ({
+    dateTime: jest.fn(),
+    number: jest.fn(),
+    relativeTime: jest.fn(),
+  }),
+  getMessages: () => ({}),
+  getNow: () => new Date(),
+  getTimeZone: () => 'UTC',
+}));
+
+// Mock browser globals
+Object.defineProperty(global, 'Request', {
+  value: class Request {
+    constructor(input: any, init?: any) {
+      this.url = input;
+      this.method = init?.method || 'GET';
+      this.headers = new Map(Object.entries(init?.headers || {}));
+    }
+    url: string;
+    method: string;
+    headers: Map<string, string>;
+  },
+});
+
+Object.defineProperty(global, 'Headers', {
+  value: class Headers {
+    private headers = new Map<string, string>();
+    constructor(init?: any) {
+      if (init) {
+        Object.entries(init).forEach(([key, value]) => {
+          this.headers.set(key, value as string);
+        });
+      }
+    }
+    get(name: string) {
+      return this.headers.get(name) || null;
+    }
+    set(name: string, value: string) {
+      this.headers.set(name, value);
+    }
+    has(name: string) {
+      return this.headers.has(name);
+    }
+  },
+});
+
+Object.defineProperty(global, 'Response', {
+  value: class Response {
+    constructor(body?: any, init?: any) {
+      this.status = init?.status || 200;
+      this.statusText = init?.statusText || 'OK';
+      this.headers = new Map(Object.entries(init?.headers || {}));
+      this.body = body;
+    }
+    status: number;
+    statusText: string;
+    headers: Map<string, string>;
+    body: any;
+    json() {
+      return Promise.resolve(this.body);
+    }
+    text() {
+      return Promise.resolve(String(this.body));
+    }
+  },
+});
+
+// Mock Next.js router
 jest.mock('next/navigation', () => ({
   useRouter: () => ({
     push: jest.fn(),
     replace: jest.fn(),
+    prefetch: jest.fn(),
     back: jest.fn(),
+    forward: jest.fn(),
+    refresh: jest.fn(),
+    pathname: '/test',
+    query: {},
+    asPath: '/test',
   }),
   useSearchParams: () => ({
-    get: jest.fn(() => null),
+    get: jest.fn(),
   }),
-  useParams: () => ({
-    tenant: 'test-tenant',
-  }),
-}));
-
-jest.mock('@tanstack/react-query', () => ({
-  useMutation: () => ({
-    mutate: jest.fn(),
-    isLoading: false,
-    error: null,
-  }),
-  useQuery: () => ({
-    data: null,
-    isLoading: false,
-    error: null,
-  }),
-  QueryClient: jest.fn().mockImplementation(() => ({
-    invalidateQueries: jest.fn(),
-  })),
-  QueryClientProvider: jest.fn().mockImplementation(({ children }) => children),
-}));
-
-jest.mock('next/image', () => ({
-  __esModule: true,
-  default: jest.fn().mockImplementation(() => null),
-}));
-
-jest.mock('next/server', () => ({
-  NextRequest: jest.fn(),
-  NextResponse: {
-    json: jest.fn(() => ({ json: jest.fn() })),
-    redirect: jest.fn(),
-  },
-}));
-
-// Mock server-side modules that shouldn't be imported in client tests
-jest.mock('@/libs/axios/connectServiceAxios', () => ({
-  connectServices: jest.fn(),
-}));
-
-jest.mock('@/tenants/tenantSettings', () => ({
-  appCredSetts: jest.fn(() => Promise.resolve({ tenantId: 'test-tenant' })),
-}));
-
-jest.mock('@/libs/http', () => ({
-  createHttpConfig: jest.fn(),
-}));
-
-jest.mock('@/utils/redis', () => ({
-  redisGet: jest.fn(),
-  redisSet: jest.fn(),
-  redisDel: jest.fn(),
+  usePathname: () => '/test',
 }));
 
 // Mock Zustand stores
 jest.mock('@/store', () => ({
-  useMenuStore: jest.fn(() => ({
-    setCurrentItem: jest.fn(),
-  })),
-  useRoutesStore: jest.fn(() => ({
-    loginRoute: 'signin',
-    setRoute: jest.fn(),
-  })),
-  useSessionStorage: jest.fn(() => ({
-    setSessReset: jest.fn(),
-    resetSessStore: jest.fn(),
-  })),
-  useTenantStore: jest.fn(() => ({
-    tenantSett: {
-      tenant: 'test-tenant',
-      tenantUri: 'test-tenant',
-      sessResetTime: 5,
-    },
-  })),
-  useUiStore: jest.fn(() => ({
-    loadingScreen: jest.fn(),
+  useUiStore: () => ({
+    setLoadingScreen: jest.fn(),
     setPopperError: jest.fn(),
-  })),
-  useModeStore: jest.fn(() => ({})),
-}));
-
-// Mock utils/tools
-jest.mock('@/utils/tools', () => ({
-  getImages: jest.fn((tenant: string, image: string) => `/images/${tenant}/${image}`),
-  getSchema: jest.fn(),
+  }),
+  useTenantStore: () => ({
+    tenantSett: {
+      tenant: 'test',
+      sessResetTime: 30,
+      tenantUri: 'test-uri',
+    },
+  }),
+  useSessionStorage: () => ({
+    resetSessStore: jest.fn(),
+  }),
+  useMenuStore: () => ({}),
 }));
 
 // Mock hooks
 jest.mock('@/hooks', () => ({
-  useBrowserRequest: jest.fn(() => ({
-    createBrowserRequest: jest.fn(),
-  })),
-  useInitStatesHook: jest.fn(),
-  useRequestCodeHook: jest.fn(),
-  useSessionActionsHook: jest.fn(),
-  useSessionControlHook: jest.fn(),
+  useBrowserRequest: () => ({
+    createBrowserRequest: jest.fn(() => Promise.resolve({ payload: {} })),
+  }),
+}));
+
+// Mock React Query
+jest.mock('@tanstack/react-query', () => ({
+  useMutation: () => ({
+    mutate: jest.fn(),
+    isPending: false,
+    isError: false,
+  }),
+  QueryClient: jest.fn(),
+  QueryClientProvider: ({ children }: { children: React.ReactNode }) => children,
 }));
 
 module.exports = {
