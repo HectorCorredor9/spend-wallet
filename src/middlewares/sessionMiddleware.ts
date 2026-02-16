@@ -3,9 +3,10 @@ import type { NextResponse } from 'next/server';
 import { Tenant } from '@/interfaces';
 import { cookieValues, getSessionId } from '@/utils';
 import { sessionSetts } from '@/tenants/tenantSettings';
-import { apiPaths, headersKey, sessCookieName } from '@/constans';
+import { sessCookieName } from '@/constans';
+import { createRefreshSess } from '@/libs/redis';
 
-export async function handleSession(tenant: Tenant, response: NextResponse, requestOrigin: string) {
+export async function handleSession(tenant: Tenant, response: NextResponse) {
   const { sessExpTime } = await sessionSetts(tenant);
   const sessionId = await getSessionId();
 
@@ -20,36 +21,18 @@ export async function handleSession(tenant: Tenant, response: NextResponse, requ
     return;
   }
 
-  const origin = requestOrigin.replace('localhost', '127.0.0.1');
-  const url = `${origin}${apiPaths.appAPiV1}/session`;
-  console.log("[v0] handleSession fetch URL:", url, "origin:", requestOrigin);
-
   try {
-    const fetchResponse = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        [headersKey.appTenant]: tenant,
-      },
-      body: JSON.stringify({ tenant, sessionId }),
-    });
-
-    if (!fetchResponse.ok) {
-      console.error('Session request failed with status:', fetchResponse.status);
-      return;
-    }
-
-    const data = await fetchResponse.json();
+    const newSessionId = await createRefreshSess(tenant, sessionId);
 
     const cookieSesion = cookieValues({
       name: sessCookieName,
-      value: data.sessionId,
+      value: newSessionId,
       sameSite: 'strict',
       expires: sessExpTime + 10,
     });
 
     response.cookies.set(cookieSesion);
   } catch (error) {
-    console.error('[v0] Session creation error:', (error as Error).message, 'cause:', (error as Error).cause);
+    console.error('Session creation error:', (error as Error).message);
   }
 }

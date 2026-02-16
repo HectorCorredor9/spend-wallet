@@ -27,7 +27,7 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(refreshedURL);
     }
 
-    await handleSession(tenant, response, nextUrl.origin);
+    await handleSession(tenant, response);
 
     const lagnCookie = cookies.get(langCookieName)?.value;
     const lagn = await availableLang(lagnCookie);
