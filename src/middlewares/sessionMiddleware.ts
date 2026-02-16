@@ -20,7 +20,9 @@ export async function handleSession(tenant: Tenant, response: NextResponse, requ
     return;
   }
 
-  const url = `${requestOrigin}${apiPaths.appAPiV1}/session`;
+  const origin = requestOrigin.replace('localhost', '127.0.0.1');
+  const url = `${origin}${apiPaths.appAPiV1}/session`;
+  console.log("[v0] handleSession fetch URL:", url, "origin:", requestOrigin);
 
   try {
     const fetchResponse = await fetch(url, {
@@ -48,6 +50,6 @@ export async function handleSession(tenant: Tenant, response: NextResponse, requ
 
     response.cookies.set(cookieSesion);
   } catch (error) {
-    console.error('Session creation error:', (error as Error).message);
+    console.error('[v0] Session creation error:', (error as Error).message, 'cause:', (error as Error).cause);
   }
 }
