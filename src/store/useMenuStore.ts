@@ -24,7 +24,6 @@ import type { MenuStoreProps } from '@/interfaces';
  */
 export const useMenuStore = create<MenuStoreProps>()(
   persist(
-    devtools(
       (set) => ({
         currentItem: 'home',
 
@@ -39,5 +38,5 @@ export const useMenuStore = create<MenuStoreProps>()(
       { name: 'menu-store' }
     ),
     { name: 'menuStore', storage: createJSONStorage(() => sessionStorage) }
-  )
+  
 );
