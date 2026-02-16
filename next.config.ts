@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
   crossOrigin: 'anonymous',
   poweredByHeader: false,
   output: 'standalone',
+  serverExternalPackages: ['ioredis'],
 };
 
 export default withNextIntl(nextConfig);

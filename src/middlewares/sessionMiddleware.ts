@@ -1,16 +1,13 @@
 import type { NextResponse } from 'next/server';
 // Internal app
-import { createHttpConfig } from '@/libs/http';
-import { applicationRequest } from '@/libs/fetch';
-import { HttpRequest, Tenant } from '@/interfaces';
+import { Tenant } from '@/interfaces';
 import { cookieValues, getSessionId } from '@/utils';
 import { sessionSetts } from '@/tenants/tenantSettings';
-import { headersKey, sessCookieName } from '@/constans';
+import { sessCookieName } from '@/constans';
+import { createRefreshSess } from '@/libs/redis';
 
 export async function handleSession(tenant: Tenant, response: NextResponse) {
   const { sessExpTime } = await sessionSetts(tenant);
-  const httpConfig = createHttpConfig({ timeout: 59700 });
-  httpConfig.headers[headersKey.appTenant] = tenant;
   const sessionId = await getSessionId();
 
   if (sessionId && typeof sessionId === 'string' && sessionId.length > 10) {
@@ -24,25 +21,18 @@ export async function handleSession(tenant: Tenant, response: NextResponse) {
     return;
   }
 
-  const httpRequest: HttpRequest = {
-    method: 'post',
-    pathUrl: '/session',
-    dataRequest: { tenant, sessionId },
-    httpConfig,
-  };
+  try {
+    const newSessionId = await createRefreshSess(tenant, sessionId);
 
-  const { data, status } = await applicationRequest(httpRequest);
+    const cookieSesion = cookieValues({
+      name: sessCookieName,
+      value: newSessionId,
+      sameSite: 'strict',
+      expires: sessExpTime + 10,
+    });
 
-  if (status !== 200) {
-    console.error(data);
+    response.cookies.set(cookieSesion);
+  } catch (error) {
+    console.error('Session creation error:', (error as Error).message);
   }
-
-  const cookieSesion = cookieValues({
-    name: sessCookieName,
-    value: data.sessionId,
-    sameSite: 'strict',
-    expires: sessExpTime + 10,
-  });
-
-  response.cookies.set(cookieSesion);
 }
