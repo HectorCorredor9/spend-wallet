@@ -1,6 +1,6 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
-import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 // Internal app
 import { ChildrenProps } from '@/interfaces';
 
