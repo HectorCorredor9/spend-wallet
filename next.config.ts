@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
   crossOrigin: 'anonymous',
   poweredByHeader: false,
   output: 'standalone',
+  outputFileTracingIncludes: {
+    '/*': ['./dictionary/**/*'],
+  },
 };
 
 export default withNextIntl(nextConfig);
