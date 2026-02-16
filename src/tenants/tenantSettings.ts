@@ -1,3 +1,5 @@
+'use server';
+
 // Internal app
 import { jwtAlgs, defaultTenant } from '@/constans';
 import { currenTenant } from '@/utils';
