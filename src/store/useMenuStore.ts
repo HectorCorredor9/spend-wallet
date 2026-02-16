@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-// Internal app
-import type { MenuStoreProps } from '@/interfaces';
+//Internal app
+import { MenuStoreProps } from '@/interfaces';
 
 /**
  * Store for navMenu
@@ -33,6 +33,6 @@ export const useMenuStore = create<MenuStoreProps>()(
 
       setDrawerStatus: (status) => set({ drawerStatus: status }, false),
     }),
-    { name: 'menuStore', storage: createJSONStorage(() => sessionStorage) }
-  )
+    { name: 'menu-store', storage: createJSONStorage(() => sessionStorage) },
+  ),
 );

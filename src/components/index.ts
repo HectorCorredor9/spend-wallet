@@ -1,5 +1,4 @@
 //Form
-export { default as InputOTP } from './form/InputOTP';
 export { default as InputText } from './form/InputText';
 export { default as InputPass } from './form/InputPass';
 export { default as InputRadio } from './form/InputRadio';
