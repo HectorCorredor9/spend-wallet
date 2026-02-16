@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-cognito-identity-provider": "^3.768.0",
+    "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@hookform/resolvers": "^4.1.3",

@@ -1,16 +1,12 @@
 import type { NextResponse } from 'next/server';
 // Internal app
-import { createHttpConfig } from '@/libs/http';
-import { applicationRequest } from '@/libs/fetch';
-import { HttpRequest, Tenant } from '@/interfaces';
+import { Tenant } from '@/interfaces';
 import { cookieValues, getSessionId } from '@/utils';
 import { sessionSetts } from '@/tenants/tenantSettings';
-import { headersKey, sessCookieName } from '@/constans';
+import { apiPaths, headersKey, sessCookieName } from '@/constans';
 
-export async function handleSession(tenant: Tenant, response: NextResponse) {
+export async function handleSession(tenant: Tenant, response: NextResponse, requestOrigin: string) {
   const { sessExpTime } = await sessionSetts(tenant);
-  const httpConfig = createHttpConfig({ timeout: 59700 });
-  httpConfig.headers[headersKey.appTenant] = tenant;
   const sessionId = await getSessionId();
 
   if (sessionId && typeof sessionId === 'string' && sessionId.length > 10) {
@@ -24,25 +20,34 @@ export async function handleSession(tenant: Tenant, response: NextResponse) {
     return;
   }
 
-  const httpRequest: HttpRequest = {
-    method: 'post',
-    pathUrl: '/session',
-    dataRequest: { tenant, sessionId },
-    httpConfig,
-  };
+  const url = `${requestOrigin}${apiPaths.appAPiV1}/session`;
 
-  const { data, status } = await applicationRequest(httpRequest);
+  try {
+    const fetchResponse = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        [headersKey.appTenant]: tenant,
+      },
+      body: JSON.stringify({ tenant, sessionId }),
+    });
 
-  if (status !== 200) {
-    console.error(data);
+    if (!fetchResponse.ok) {
+      console.error('Session request failed with status:', fetchResponse.status);
+      return;
+    }
+
+    const data = await fetchResponse.json();
+
+    const cookieSesion = cookieValues({
+      name: sessCookieName,
+      value: data.sessionId,
+      sameSite: 'strict',
+      expires: sessExpTime + 10,
+    });
+
+    response.cookies.set(cookieSesion);
+  } catch (error) {
+    console.error('Session creation error:', (error as Error).message);
   }
-
-  const cookieSesion = cookieValues({
-    name: sessCookieName,
-    value: data.sessionId,
-    sameSite: 'strict',
-    expires: sessExpTime + 10,
-  });
-
-  response.cookies.set(cookieSesion);
 }

@@ -39,7 +39,7 @@ function updateCurrentSettings(settings: TenantSettings, tenant: Tenant): Tenant
   const redisHost = process.env[`${tenantSett}_REDIS_HOST`] ?? redisSettings.host;
   const redisPort = process.env[`${tenantSett}_REDIS_PORT`] ?? redisSettings.port;
   const redisDb = process.env[`${tenantSett}_REDIS_DB`] ?? redisSettings.db;
-  const redisTls = process.env[`${tenantSett}REDIS_TLS`] ?? redisSettings.tls;
+  const redisTls = process.env[`${tenantSett}_REDIS_TLS`] ?? redisSettings.tls;
   const redisUser = process.env[`${tenantSett}_REDIS_USER`] ?? redisSettings.user;
   const redisPass = process.env[`${tenantSett}_REDIS_PASSWORD`] ?? redisSettings.password;
   const tenantId = process.env[`${tenantSett}_TENANT_ID`] ?? credentials.tenantId;
