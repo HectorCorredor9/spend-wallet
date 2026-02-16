@@ -24,18 +24,15 @@ import { MenuStoreProps } from '@/interfaces';
  */
 export const useMenuStore = create<MenuStoreProps>()(
   persist(
-    devtools(
-      (set) => ({
-        currentItem: 'home',
+    (set) => ({
+      currentItem: 'home',
 
-        setCurrentItem: (item) => set({ currentItem: item }, false, 'setCurrentItem'),
+      setCurrentItem: (item) => set({ currentItem: item }, false),
 
-        drawerStatus: false,
+      drawerStatus: false,
 
-        setDrawerStatus: (status) => set({ drawerStatus: status }, false, 'setDrawerStatus'),
-      }),
-      { name: 'menu-store', storage: createJSONStorage(() => sessionStorage) }
-    ),
-    { name: 'menuStore' }
-  )
+      setDrawerStatus: (status) => set({ drawerStatus: status }, false),
+    }),
+    { name: 'menu-store', storage: createJSONStorage(() => sessionStorage) },
+  ),
 );
